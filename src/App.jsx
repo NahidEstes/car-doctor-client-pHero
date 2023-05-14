@@ -22,9 +22,14 @@ function App() {
             <Link to="/register">Register</Link>
           </li>
           {user?.email ? (
-            <li>
-              <button onClick={handleLogOut}>Log Out</button>
-            </li>
+            <div>
+              <li>
+                <Link to="/bookings">Bookings</Link>
+              </li>
+              <li>
+                <button onClick={handleLogOut}>Log Out</button>
+              </li>
+            </div>
           ) : (
             <li>
               <Link to="/login">Login</Link>

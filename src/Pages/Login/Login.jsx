@@ -19,11 +19,27 @@ const Login = () => {
 
     loginUser(email, password)
       .then((result) => {
-        console.log(result.user);
-        form.reset();
-        navigate(from, { replace: true });
+        const user = result.user;
+        const loggedUser = {
+          email: user.email,
+        };
+        console.log(loggedUser);
+        // form.reset();
+        // navigate(from, { replace: true });
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("jwt response:", data);
+          });
       })
       .catch((error) => {
+        console.log(error);
         setError(error.message);
       });
   };
